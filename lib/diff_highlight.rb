@@ -2,6 +2,8 @@ require "diff_highlight/version"
 require 'coderay'
 
 class DiffHighlight
+  Signal.trap("PIPE") { exit(0) }
+
   EXTENSIONS = {
     %w(.py)        => :python,
     %w(.js)        => :javascript,
@@ -30,21 +32,19 @@ class DiffHighlight
   def execute
     ARGF.each_line do |line|
       if line =~ /^diff --git/
+        flush_buffer
         @language = type_from_filename(line.split.last)
       end
 
-      if line =~ /^\+/
-        @buffer += line
+      if line =~ /^\+[^\+]/
+        write_added_line(line)
       else
-        highlight_write(CodeRay.highlight(@buffer, @language, {}, :term))
-        @buffer.clear
-        if line =~ /^-/
-          $stdout.write(red(line))
-        else
-          $stdout.write(line)
-        end
+        flush_buffer
+        write_other_line(line)
       end
     end
+
+    flush_buffer
   end
 
   private
@@ -56,14 +56,42 @@ class DiffHighlight
       k.any? { |file_name| file_name == File.basename(filename) }
     end
 
-    language || :txt
+    language || default
   end
 
-  def highlight_write(str)
-    $stdout.write(CodeRay.highlight(@buffer, @language, {}, :term))
+  def flush_buffer
+    if !@buffer.empty?
+      write(CodeRay.highlight(@buffer, @language, {}, :term))
+      @buffer.clear
+    end
+  end
+
+  def write_added_line(line)
+    if @language == :unknown
+      write(green(line))
+    else
+      @buffer += line
+    end
+  end
+
+  # when a line is not an addition (e.g begins with a +)
+  def write_other_line(line)
+    if line =~ /^-/
+      write(red(line))
+    else
+      write(line)
+    end
+  end
+
+  def write(str)
+    $stdout.write(str) unless $stdout.closed?
   end
 
   def red(str)
     "\e[31m#{str}\e[0m"
+  end
+
+  def green(str)
+    "\e[32m#{str}\e[0m"
   end
 end
