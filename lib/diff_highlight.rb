@@ -77,7 +77,7 @@ class DiffHighlight
 
   # when a line is not an addition (e.g begins with a +)
   def write_other_line(line)
-    if line =~ /^-/
+    if line =~ /^-[^-]/
       write(red(line))
     else
       write(line)
