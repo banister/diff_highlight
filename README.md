@@ -11,7 +11,7 @@ git diff | diff_highlight | less
 
 Output:
 
-![img](https://i.imgur.com/XNtA4SJ.png)
+![img](https://i.imgur.com/DcO4txF.png)
 
 
 ## License
