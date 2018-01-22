@@ -25,6 +25,21 @@ Output:
 This gem provides the `diff_highlight` executable. Just install the gem and the executable should be available :)
 Use as follows: `git diff | diff_highlight | less`
 
+Or setup a git alias:
+
+In `~/.gitconfig`:
+
+```
+[alias]
+    diffc="!f() { git diff $@ | diff_highlight | less; }; f"
+```
+
+And use like so:
+
+```
+git diffc HEAD^2
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
