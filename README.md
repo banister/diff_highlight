@@ -38,7 +38,7 @@ In `~/.gitconfig`:
 And use like so:
 
 ```
-git diffc HEAD^2
+git diffc HEAD~2
 ```
 
 ## License
