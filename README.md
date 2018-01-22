@@ -11,7 +11,7 @@ git diff | diff_highlight | less
 
 Output:
 
-![img](https://i.imgur.com/DcO4txF.png)
+![img](https://www.dropbox.com/s/5s54kls45rzxvrn/Screenshot%202018-01-22%2019.49.10.png?raw=1)
 
 
 ## Features
