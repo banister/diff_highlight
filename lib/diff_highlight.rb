@@ -3,6 +3,7 @@ require "coderay"
 
 class DiffHighlight
   Signal.trap("PIPE") { exit(0) }
+  Signal.trap("INT") { exit(0) }
 
   EXTENSIONS = {
     %w(.py)        => :python,
