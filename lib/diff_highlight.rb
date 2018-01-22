@@ -79,8 +79,10 @@ class DiffHighlight
   def write_other_line(line)
     if line =~ /^-[^-]/
       write(red(line))
+    elsif line =~ /^(commit|Author|Date)/
+      write(bold(line))
     else
-      write(line)
+      write(normal(line))
     end
   end
 
@@ -94,5 +96,13 @@ class DiffHighlight
 
   def green(str)
     "\e[32m#{str}\e[0m"
+  end
+
+  def bold(str)
+    "\e[1m#{str}\e[22m"
+  end
+
+  def normal(str)
+    "\e[0m#{str}"
   end
 end
