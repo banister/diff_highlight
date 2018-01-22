@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jrmair@gmail.com"]
 
   spec.summary       = "Syntax highlights content from a git diff"
-  spec.description   = "git diff | diff_highlight"
+  spec.description   = spec.summary
   spec.homepage      = "https://github.com/banister/diff_highlight"
   spec.license       = "MIT"
 
