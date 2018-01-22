@@ -1,5 +1,5 @@
 require "diff_highlight/version"
-require 'coderay'
+require "coderay"
 
 class DiffHighlight
   Signal.trap("PIPE") { exit(0) }
