@@ -19,7 +19,7 @@ Output:
 * Makes its best guess at the language appearing in the diff and uses appropriate highlighter
 * Supports Ruby, Javascript, C, YAML, Rakefiles, CSS, HTML, etc
 * Supports multiple languages in the same diff
-* Supports streaming input
+* Supports streaming input and output
 
 ## How to use
 
