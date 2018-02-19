@@ -9,7 +9,7 @@ class DiffHighlight
     %w(.py)        => :python,
     %w(.js)        => :javascript,
     %w(.css)       => :css,
-    %w(.xml)       => :xml,
+    %w(.xml .svg)  => :xml,
     %w(.php)       => :php,
     %w(.html)      => :html,
     %w(.diff)      => :diff,
